@@ -1,13 +1,11 @@
 require 'spec_helper'
-# Rename this file to classname_spec.rb
-# Check other boxen modules for examples
-# or read http://rspec-puppet.com/tutorial/
+
 describe 'janus' do
-  let(':facts') do
+  let(:facts){
     {
-      :luser => 'test_user'
+      :boxen_user => 'test_user'
     }
-  end
+  }
 
   it do
     should contain_class('janus')
@@ -16,6 +14,7 @@ describe 'janus' do
     should contain_exec('Install Janus').with({
       :command =>  '/usr/bin/curl -Lo- https://bit.ly/janus-bootstrap | /bin/bash'
     })
-    should contain_file("/Users/test_user/.janus")
+    should contain_file("/Users/#{facts[:boxen_user]}/.janus")
+      .with_ensure('directory')
   end
 end
