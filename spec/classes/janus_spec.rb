@@ -9,7 +9,7 @@ describe 'janus' do
 
   it do
     should contain_class('janus')
-    should include_class('macvim')
+    should include_class('vim')
 
     should contain_exec('Install Janus').with({
       :command =>  '/usr/bin/curl -Lo- https://bit.ly/janus-bootstrap | /bin/bash'
